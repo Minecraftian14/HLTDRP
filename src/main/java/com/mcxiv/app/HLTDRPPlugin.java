@@ -3,7 +3,6 @@ package com.mcxiv.app;
 import games.rednblack.h2d.common.MsgAPI;
 import games.rednblack.h2d.common.plugins.H2DPluginAdapter;
 import main.generalLogger.LOGGER;
-import net.arikia.dev.drpc.DiscordRPC;
 import net.mountainblade.modular.annotations.Implementation;
 import org.puremvc.java.interfaces.INotification;
 import org.puremvc.java.patterns.mediator.Mediator;
@@ -21,10 +20,20 @@ public class HLTDRPPlugin extends H2DPluginAdapter {
         LOGGER.general(format, "Plugin Instantiated!");
     }
 
+    private SettingsPacket settingsPacket;
+
     @Override
     public void initPlugin() {
-        RPCTool.init("769535754350886923");
         facade.registerMediator(new Med(this));
+        HLTDRPSettings settings = new HLTDRPSettings(facade, this);
+
+        settingsPacket = new SettingsPacket();
+        settingsPacket.fromStorage(getStorage());
+        settings.setSettings(settingsPacket);
+        facade.sendNotification(MsgAPI.ADD_PLUGIN_SETTINGS, settings);
+
+        RPCTool.init(settingsPacket);
+
         LOGGER.general(format, "Plugin Initialised!");
     }
 
@@ -43,7 +52,9 @@ class Med extends Mediator {
 
     @Override
     public String[] listNotificationInterests() {
-        return new String[]{MsgAPI.SCENE_LOADED, MsgAPI.DISPOSE};
+        return new String[]{
+                MsgAPI.SCENE_LOADED, MsgAPI.DISPOSE
+        };
     }
 
     @Override
