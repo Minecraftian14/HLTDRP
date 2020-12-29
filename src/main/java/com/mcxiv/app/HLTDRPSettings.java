@@ -27,18 +27,18 @@ public class HLTDRPSettings extends SettingsNodeValue<SettingsPacket> {
 
         // Instantiation
         cbx_pluginOn = StandardWidgetsFactory.createCheckBox("Enable Discord RPC: ");
-        StandardWidgetsFactory.addTooltip(cbx_pluginOn, "If you dont want the plugin to show you're using Hyperlap, or some bug is causing issues, you can disable the plugin here.");
+        StandardWidgetsFactory.addTooltip(cbx_pluginOn, "If you dont want the plugin to show you're using HyperLap2D,\nor some bug is causing issues, you can disable the plugin here.");
 
         cbx_projName = StandardWidgetsFactory.createCheckBox("Show Project Name: ");
-        StandardWidgetsFactory.addTooltip(cbx_projName, "If you want to keep your upcoming project a secret from your fans, you might want to hide the project name from being visible to everyone!");
+        StandardWidgetsFactory.addTooltip(cbx_projName, "If you want to keep your upcoming project a secret from your fans,\nyou might want to hide the project name from being visible to everyone!");
 
         fie_updtRate = StandardWidgetsFactory.createTextField();
-        StandardWidgetsFactory.addTooltip(fie_updtRate, "This rate is measured as number of runs done per second. 0.5 rps means RPC will update every 2 seconds.");
+        StandardWidgetsFactory.addTooltip(fie_updtRate, "This rate is measured as number of runs done per second.\n0.5 rps means RPC will update every 2 seconds.");
 
         // Adding Widgets
-        getContentTable().add("HLTDRP: HyperLap2D Discord RPC Plugin").left().row();
+        getContentTable().add("HyperLap2D Discord RPC Plugin").left().row();
 
-        getContentTable().addSeparator();
+        getContentTable().addSeparator().colspan(2);
 
         getContentTable().add(cbx_pluginOn).left().padTop(17).padLeft(10).row();
         getContentTable().add(cbx_projName).left().padTop(10).padLeft(10).row();

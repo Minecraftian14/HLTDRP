@@ -34,7 +34,7 @@ public class RPCTool {
 
 
         presence = new DiscordRichPresence.Builder("");
-        presence.setBigImage("icon", "Hyper Lap 2D");
+        presence.setBigImage("icon", "HyperLap2D");
 
         DiscordRPC.discordInitialize("769535754350886923", handlers, true);
         DiscordRPC.discordRegister("769535754350886923", "");
@@ -58,7 +58,7 @@ public class RPCTool {
 
     private static final String[] boot_ups = new String[]{"Just Started", "Planning", "Opening up",
             "Getting Ready", "Launched", "Some Stuff"};
-    private static final String[] actions = new String[]{"Working in", "Fiddling with", "Brainstorming on",
+    private static final String[] actions = new String[]{"Working on", "Fiddling with", "Brainstorming on",
             "Living with", "Trying out", "Thinking about", "Updating", "Improving", "Testing"};
 
     public static void onReady(DiscordUser user) {
