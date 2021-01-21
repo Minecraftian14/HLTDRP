@@ -39,8 +39,8 @@ public class SettingsPacket {
                 .row("Plugin Activity", (isPluginEnabled ? "enabled" : "disabled"))
                 .row("Project View", (isProjectViewEnabled ? "enabled" : "disabled"))
                 .row("Update Rate", updatePerSecondRate+" rps")
-                .formatTitle(":@d0c600u:")
-                .formatHead(":@713f00:", ":@4d2b00:")
+                .formatTitle(":@d0c600#0u:")
+                .formatHead(":@4d2b00:", ":@713f00:")
                 .format(":@a25900:", ":@d97700:")
                 .create();
     }

@@ -41,7 +41,7 @@ public class RPCTool {
         LOG.prt("", "RPC Initialised!");
 
         startExecutor();
-        System.out.println(packet);
+        LOG.raw(packet.toString());
     }
 
     private static void startExecutor() {

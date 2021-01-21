@@ -42,8 +42,8 @@ dependencies {
 //    implementation 'com.github.Minecraftian14:mylogger:5e194eb06e'
 //    provided group: 'com.github.Minecraftian14', name: 'MyLOGGER', version: '5e194eb06e'
 
-    implementation 'com.github.Minecraftian14:MyLOGGER:7e273b25dc'
-    provided group: 'com.github.Minecraftian14', name: 'MyLOGGER', version: '7e273b25dc'
+    implementation 'com.github.Minecraftian14:MyLOGGER:V3'
+    provided group: 'com.github.Minecraftian14', name: 'MyLOGGER', version: 'V3'
 
     compile fileTree(dir: 'libs', include: '*.jar')
 
