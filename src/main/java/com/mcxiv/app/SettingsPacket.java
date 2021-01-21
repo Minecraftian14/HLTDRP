@@ -1,5 +1,7 @@
 package com.mcxiv.app;
 
+import com.mcxiv.logger.tables.Table;
+
 import java.util.Map;
 
 public class SettingsPacket {
@@ -31,9 +33,15 @@ public class SettingsPacket {
 
     @Override
     public String toString() {
-        return " [ Plugin " + (isPluginEnabled ? "enabled" : "disabled") +
-                ", Project Display " + (isPluginEnabled ? "enabled" : "disabled") +
-                ", Update Rate " + updatePerSecondRate +
-                " ]";
+        return Table.stripped()
+                .title("Plugin Settings Detail")
+                .head("Setting Name", "Status")
+                .row("Plugin Activity", (isPluginEnabled ? "enabled" : "disabled"))
+                .row("Project View", (isProjectViewEnabled ? "enabled" : "disabled"))
+                .row("Update Rate", updatePerSecondRate+" rps")
+                .formatTitle(":@d0c600u:")
+                .formatHead(":@713f00:", ":@4d2b00:")
+                .format(":@a25900:", ":@d97700:")
+                .create();
     }
 }

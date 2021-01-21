@@ -1,6 +1,6 @@
 package com.mcxiv.app;
 
-import main.generalLogger.LOGGER;
+import com.mcxiv.logger.decorations.Format;
 import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;
@@ -10,11 +10,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static main.utlities.ConsoleColors.ANSI.*;
+import static com.mcxiv.app.HLTDRPPlugin.LOG;
 
+@Format({":: :@3dae00$Wbu:Discord RPC ::", ":: :@1b4d00#Fn%40s: ::"})
 public class RPCTool {
-
-    public static final String format = GREEN_BACKGROUND + UNDERLINED + BOLD + BRIGHT_BLUE + " Discord RPC " + RESET + "\t";
 
     private static DiscordRichPresence.Builder presence;
     private static ScheduledExecutorService service;
@@ -22,10 +21,10 @@ public class RPCTool {
 
     public static void init() {
         if (!packet.isPluginEnabled) {
-            LOGGER.error(format, "Plugin is not enabled! Please enable plugin if you want to use it");
+            LOG.prt("", "[FF0000]Plugin is not enabled! Please enable plugin if you want to use it");
             return;
         }
-        LOGGER.general(format, "Initialising RPC!");
+        LOG.prt("", "Initialising RPC!");
 
         var handlers = new DiscordEventHandlers.Builder()
                 .setReadyEventHandler(RPCTool::onReady)
@@ -39,16 +38,17 @@ public class RPCTool {
         DiscordRPC.discordInitialize("769535754350886923", handlers, true);
         DiscordRPC.discordRegister("769535754350886923", "");
 
-        LOGGER.notice(format, "RPC Initialised!");
+        LOG.prt("", "RPC Initialised!");
 
         startExecutor();
+        System.out.println(packet);
     }
 
     private static void startExecutor() {
         service = Executors.newSingleThreadScheduledExecutor();
         service.scheduleAtFixedRate(DiscordRPC::discordRunCallbacks, 500, (long) (packet.updatePerSecondRate * 1000), TimeUnit.MILLISECONDS);
 
-        LOGGER.notice(format, "Executor on duty at rate 0.5 rps!");
+        LOG.prt("", "Executor on duty at rate 0.5 rps!");
     }
 
     public static void init(SettingsPacket settingsPacket) {
@@ -68,7 +68,7 @@ public class RPCTool {
         presence.setStartTimestamps(System.currentTimeMillis() / 1000);
         DiscordRPC.discordUpdatePresence(presence.build());
 
-        LOGGER.info(format, "Home RPC Updated");
+        LOG.prt("", "Home RPC Updated");
     }
 
     public static void onProjectOpen(String rawMessage) {
@@ -77,7 +77,7 @@ public class RPCTool {
         presence.setDetails(actions[(int) (Math.random() * actions.length)] + " " + rawMessage);
         DiscordRPC.discordUpdatePresence(presence.build());
 
-        LOGGER.info(format, "Project Specific RPC Updated");
+        LOG.prt("", "Project Specific RPC Updated");
     }
 
     public static void onApplicationClose() {
@@ -86,12 +86,12 @@ public class RPCTool {
         service.shutdown();
         DiscordRPC.discordShutdown();
 
-        LOGGER.info(format, "RPC closed!");
+        LOG.prt("", "RPC closed!");
     }
 
     public static void updateSettings(SettingsPacket newSets) {
 
-        LOGGER.general(format, "Settings changing from", packet, "to", newSets);
+        LOG.prt("", "Settings changing from", packet, "to", newSets);
 
         onApplicationClose();
         init(newSets);

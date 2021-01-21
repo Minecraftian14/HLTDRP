@@ -1,23 +1,28 @@
 package com.mcxiv.app;
 
+import com.mcxiv.logger.decorations.Decoration;
+import com.mcxiv.logger.decorations.Format;
+import com.mcxiv.logger.decorations.TagDecoration;
+import com.mcxiv.logger.formatted.FLog;
 import games.rednblack.h2d.common.MsgAPI;
 import games.rednblack.h2d.common.plugins.H2DPluginAdapter;
-import main.generalLogger.LOGGER;
 import net.mountainblade.modular.annotations.Implementation;
 import org.puremvc.java.interfaces.INotification;
 import org.puremvc.java.patterns.mediator.Mediator;
 
-import static main.utlities.ConsoleColors.ANSI.*;
+import static com.mcxiv.app.HLTDRPPlugin.LOG;
 
-@Implementation(authors = "Minecraftian14", version = "1.0.0")
+@Implementation(authors = "Minecraftian14", version = "3.0.0")
+@Format({":: :@5800d0#Fbu:RPC Plugin  ::", ":: :@01034b#Fn%40s: ::"})
 public class HLTDRPPlugin extends H2DPluginAdapter {
     public static final String CLASS_NAME = HLTDRPPlugin.class.getName();
 
-    public static final String format = GREEN_BACKGROUND + UNDERLINED + BOLD + BRIGHT_BLUE + " RPC Plugin " + RESET + " ";
+    public static final FLog LOG = FLog.getNew();
 
     public HLTDRPPlugin() {
         super(CLASS_NAME);
-        LOGGER.general(format, "Plugin Instantiated!");
+        Decoration.setDecoration(TagDecoration::new);
+        LOG.prt("", "Plugin Instantiated!");
     }
 
     private SettingsPacket settingsPacket;
@@ -34,11 +39,12 @@ public class HLTDRPPlugin extends H2DPluginAdapter {
 
         RPCTool.init(settingsPacket);
 
-        LOGGER.general(format, "Plugin Initialised!");
+        LOG.prt("", "Plugin Initialised!");
     }
 
 }
 
+@Format({":: :@5800d0#Fbu:RPC Plugin  ::", ":: :@01034b#Fn%40s: ::"})
 class Med extends Mediator {
     public static final String NAME = Med.class.getName();
 
@@ -47,7 +53,7 @@ class Med extends Mediator {
     public Med(HLTDRPPlugin plugin) {
         super(NAME);
         this.plugin = plugin;
-        LOGGER.general(HLTDRPPlugin.format, "Mediator Initialised!");
+        LOG.prt("", "Mediator Initialised!");
     }
 
     @Override

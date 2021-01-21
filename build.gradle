@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.mcxiv'
-version '1.0.0'
+version '3.0.0'
 
 ext {
     appName = 'HLTDRP'
@@ -39,8 +39,11 @@ dependencies {
 
     implementation 'com.github.Vatuu:discord-rpc:1.6.2'
     provided group: 'com.github.Vatuu', name: 'discord-rpc', version: '1.6.2'
-    implementation 'com.github.Minecraftian14:MyLOGGER:V1'
-    provided group: 'com.github.Minecraftian14', name: 'MyLOGGER', version: 'V1'
+//    implementation 'com.github.Minecraftian14:mylogger:5e194eb06e'
+//    provided group: 'com.github.Minecraftian14', name: 'MyLOGGER', version: '5e194eb06e'
+
+    implementation 'com.github.Minecraftian14:MyLOGGER:7e273b25dc'
+    provided group: 'com.github.Minecraftian14', name: 'MyLOGGER', version: '7e273b25dc'
 
     compile fileTree(dir: 'libs', include: '*.jar')
 

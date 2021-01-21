@@ -7,10 +7,9 @@ import games.rednblack.h2d.common.MsgAPI;
 import games.rednblack.h2d.common.plugins.H2DPluginAdapter;
 import games.rednblack.h2d.common.view.SettingsNodeValue;
 import games.rednblack.h2d.common.view.ui.StandardWidgetsFactory;
-import main.generalLogger.LOGGER;
 import org.puremvc.java.interfaces.IFacade;
 
-import static com.mcxiv.app.HLTDRPPlugin.format;
+import static com.mcxiv.app.HLTDRPPlugin.LOG;
 
 public class HLTDRPSettings extends SettingsNodeValue<SettingsPacket> {
 
@@ -63,13 +62,13 @@ public class HLTDRPSettings extends SettingsNodeValue<SettingsPacket> {
         try {
             getSettings().updatePerSecondRate = Float.parseFloat(fie_updtRate.getText());
         } catch (NumberFormatException e1) {
-            LOGGER.error(format, "Error for", fie_updtRate.getText());
+            LOG.prt("Error for", fie_updtRate.getText());
             try {
                 getSettings().updatePerSecondRate = Float.parseFloat(fie_updtRate.getText().replaceAll("[^0-9.,]", ""));
-                LOGGER.notice(format, "Error fixed as", getSettings().updatePerSecondRate);
+                LOG.prt("Error fixed as", getSettings().updatePerSecondRate);
             } catch (NumberFormatException e2) {
                 getSettings().updatePerSecondRate = 0.5f;
-                LOGGER.notice(format, "Error set to default", getSettings().updatePerSecondRate);
+                LOG.prt("Error set to default", getSettings().updatePerSecondRate);
             }
         }
 
@@ -87,7 +86,7 @@ public class HLTDRPSettings extends SettingsNodeValue<SettingsPacket> {
                             getSettings().updatePerSecondRate != Float.parseFloat(fie_updtRate.getText())
             );
         } catch (NumberFormatException e) {
-            LOGGER.general("Unfortunate Error For", e, "at", fie_updtRate.getText());
+            LOG.prt("Unfortunate Error For", e, "at", fie_updtRate.getText());
         }
         return false;
     }
