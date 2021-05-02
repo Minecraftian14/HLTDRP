@@ -1,8 +1,7 @@
 package com.mcxiv.app;
 
-import com.mcxiv.logger.decorations.Decoration;
+import com.mcxiv.logger.decorations.Decorations;
 import com.mcxiv.logger.decorations.Format;
-import com.mcxiv.logger.decorations.TagDecoration;
 import com.mcxiv.logger.formatted.FLog;
 import games.rednblack.h2d.common.MsgAPI;
 import games.rednblack.h2d.common.plugins.H2DPluginAdapter;
@@ -21,7 +20,7 @@ public class HLTDRPPlugin extends H2DPluginAdapter {
 
     public HLTDRPPlugin() {
         super(CLASS_NAME);
-        Decoration.setDecoration(TagDecoration::new);
+        LOG.setDecorationType(Decorations.TAG);
         LOG.prt("", "Plugin Instantiated!");
     }
 

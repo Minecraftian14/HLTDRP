@@ -21,7 +21,7 @@ public class RPCTool {
 
     public static void init() {
         if (!packet.isPluginEnabled) {
-            LOG.prt("", "[FF0000]Plugin is not enabled! Please enable plugin if you want to use it");
+            LOG.prtf(":$R:").consume("Plugin is not enabled! Please enable plugin if you want to use it");
             return;
         }
         LOG.prt("", "Initialising RPC!");
@@ -91,7 +91,8 @@ public class RPCTool {
 
     public static void updateSettings(SettingsPacket newSets) {
 
-        LOG.prt("", "Settings changing from", packet, "to", newSets);
+        LOG.prt("", "Settings changing from", packet, "to");
+        LOG.raw(newSets.toString());
 
         onApplicationClose();
         init(newSets);

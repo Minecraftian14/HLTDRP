@@ -1,6 +1,8 @@
 package com.mcxiv.app;
 
+import com.mcxiv.logger.formatted.FLog;
 import com.mcxiv.logger.tables.Table;
+import com.mcxiv.logger.util.StringsConsumer;
 
 import java.util.Map;
 
@@ -33,15 +35,23 @@ public class SettingsPacket {
 
     @Override
     public String toString() {
-        return Table.stripped()
+        StringBuilder builder = new StringBuilder();
+        FLog log = FLog.getNew((StringsConsumer) st -> {
+            for (String s : st) {
+                builder.append(s);
+            }
+        });
+        log.setDecorationType(HLTDRPPlugin.LOG.getDecorationType());
+        Table.stripped()
                 .title("Plugin Settings Detail")
                 .head("Setting Name", "Status")
                 .row("Plugin Activity", (isPluginEnabled ? "enabled" : "disabled"))
                 .row("Project View", (isProjectViewEnabled ? "enabled" : "disabled"))
                 .row("Update Rate", updatePerSecondRate+" rps")
-                .formatTitle(":@d0c600#0u:")
-                .formatHead(":@4d2b00:", ":@713f00:")
-                .format(":@a25900:", ":@d97700:")
-                .create();
+                .formatTitle("@d0c600#0u")
+                .formatHead("@4d2b00", "@713f00")
+                .format("@a25900", "@d97700")
+                .create(log);
+        return builder.toString();
     }
 }

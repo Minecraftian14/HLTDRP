@@ -3,14 +3,15 @@ plugins {
     id 'application'
 }
 
-group 'com.mcxiv'
-version '3.0.0'
+group 'com.mcxiv.app'
+version '2.3.0'
 
 ext {
     appName = 'HLTDRP'
     gdxVersion = '1.9.12'
     ashleyVersion = '1.7.3'
-    visuiVersion = '1.4.9-SNAPSHOT'
+    h2dVersion = '0.0.5'
+    visuiVersion = '1.4.9'
 }
 
 repositories {
@@ -24,36 +25,31 @@ allprojects {
     }
 }
 
-configurations {
-    provided
-    compile.extendsFrom(provided)
-}
-
 dependencies {
     implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
     implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
-    implementation("com.badlogicgames.gdx:gdx-tools:$gdxVersion")
+    implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+    implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
     implementation "com.kotcrab.vis:vis-ui:$visuiVersion"
 
     implementation 'net.mountainblade:modular:1.0'
 
-    implementation 'com.github.Vatuu:discord-rpc:1.6.2'
-    provided group: 'com.github.Vatuu', name: 'discord-rpc', version: '1.6.2'
-//    implementation 'com.github.Minecraftian14:mylogger:5e194eb06e'
-//    provided group: 'com.github.Minecraftian14', name: 'MyLOGGER', version: '5e194eb06e'
-
-    implementation 'com.github.Minecraftian14:MyLOGGER:V3'
-    provided group: 'com.github.Minecraftian14', name: 'MyLOGGER', version: 'V3'
+    compile 'com.github.Minecraftian14:MyLOGGER:v5.6'
 
     compile fileTree(dir: 'libs', include: '*.jar')
+
+    implementation "games.rednblack.hyperlap2d:common-api:$h2dVersion"
+    implementation "games.rednblack.hyperlap2d:runtime-libgdx:$h2dVersion"
 
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
-task dist(type: Jar) {
-    from files(sourceSets.main.output.classesDirs)
-    from files(sourceSets.main.output.resourcesDir)
-    from configurations.provided.asFileTree.files.collect { zipTree(it) }
-
-    destinationDirectory = file("D:\\Projects\\GITHUB\\HyperLap2D\\assets\\plugins")
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'HLTDRP',
+                'Implementation-Version': version
+    }
+//    baseName(baseName + '_fatJar')
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
