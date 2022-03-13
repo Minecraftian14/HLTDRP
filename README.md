@@ -1,7 +1,7 @@
 # HLTDRP
 #### Or in _short_ "HyperLap2D Rich Presence" Plugin.
 
-[![](https://img.shields.io/discord/872811194170347520?color=%237289da&logoColor=%23424549)](https://discord.gg/hZnHFGvU6W)
+[![](https://img.shields.io/discord/872811194170347520?color=%237289da&logoColor=%23424549)](https://discord.gg/Ar6Zuj2m82)
 
 If the <code>pretty-cute-little-title</code> fails to be satisfactorily informative or perhaps some grey matter just dont like electro pulsing through all possibilities, then here is a simple to read and omit description for this project:
   
